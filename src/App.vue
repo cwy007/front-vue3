@@ -4,7 +4,7 @@
   <imooc-footer></imooc-footer>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue'
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
@@ -13,6 +13,10 @@ export default defineComponent({
   components: {
     'imooc-header': Header,
     'imooc-footer': Footer
+  },
+  // 测试Alert组件 window.vue.$alert('msg')
+  mounted () {
+    window.vue = this
   }
 })
 </script>

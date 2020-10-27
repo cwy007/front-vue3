@@ -132,7 +132,7 @@ export default defineComponent({
         requestAnimationFrame(() => {
           reset()
         })
-      } else {
+      } else if (typeof msg === 'string') {
         setErrors({
           code: msg
         })
