@@ -38,7 +38,7 @@ const getDetail = (tid) => {
   if (token !== '') {
     headers = {
       headers: {
-        'Authorization': 'Bearer ' + store.state.token
+        Authorization: 'Bearer ' + store.state.token
       }
     }
   }
