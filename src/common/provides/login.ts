@@ -49,7 +49,7 @@ export const loginService = () => {
       state.username = ''
       state.password = ''
       state.code = ''
-      // router.push({ name: 'home' })
+      router.push({ name: 'index' })
     }
     return res
   }

@@ -13,3 +13,12 @@ export const formatDate = (date: string) => {
     return moment(date).locale('zh-cn').from(moment())
   }
 }
+
+export const hours = (date: string) => {
+  if (moment(date).isBefore(moment(moment().format('YYYY-MM-DD 00:00:00')))) {
+    return moment(date).format('YYYY-MM-DD')
+  } else {
+    // 1天内
+    return moment(date).format('HH:mm:ss')
+  }
+}
