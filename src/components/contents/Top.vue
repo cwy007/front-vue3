@@ -1,33 +1,42 @@
 <template>
-  <div class="fly-panel" v-show="lists.length > 0">
+  <div class="fly-panel" v-show="state.lists.length > 0">
     <div class="fly-panel-title fly-filter">
       <a>置顶</a>
       <a
         href="#signin"
         class="layui-hide-sm layui-show-xs-block fly-right"
         id="LAY_goSignin"
-        style="color: #FF5722;"
-      >去签到</a>
+        style="color: #ff5722"
+        >去签到</a
+      >
     </div>
-    <list-item :lists="lists" :isShow="false"></list-item>
+    <list-item :lists="state.lists" :isShow="false"></list-item>
   </div>
 </template>
 
-<script>
-import listMix from '@/mixin/list'
-import ListItem from './ListItem'
-export default {
+<script lang="ts">
+import { listService } from '@/common/provides/list'
+import ListItem from './ListItem.vue'
+import { defineComponent, onMounted } from 'vue'
+export default defineComponent({
   name: 'top',
-  mixins: [listMix],
-  data () {
+  setup () {
+    const { state, handleGetList } = listService()
+
+    state.isTop = 1
+
+    onMounted(() => {
+      handleGetList()
+    })
+
     return {
-      isTop: 1
+      state
     }
   },
   components: {
     ListItem
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

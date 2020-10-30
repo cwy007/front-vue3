@@ -5,7 +5,7 @@ import store from '@/store'
 import router from '@/router'
 import { reactive } from 'vue'
 
-export const loginUtils = () => {
+export const loginService = () => {
   let sid = ''
 
   const state = reactive({

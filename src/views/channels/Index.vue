@@ -2,7 +2,7 @@
   <div class="layui-container">
     <div class="layui-row layui-col-space15">
       <div class="layui-col-md8">
-        <!-- <imooc-top></imooc-top>-->
+        <imooc-top></imooc-top>
         <imooc-list></imooc-list>
       </div>
       <div class="layui-col-md4">
@@ -24,7 +24,7 @@ import Ads from '@/components/sidebar/Ads.vue'
 import Links from '@/components/sidebar/Links.vue'
 import { defineComponent } from 'vue'
 import List from '@/components/contents/List.vue'
-// import Top from '@/components/contents/Top'
+import Top from '@/components/contents/Top.vue'
 export default defineComponent({
   name: 'index',
   components: {
@@ -33,8 +33,8 @@ export default defineComponent({
     'imooc-hotlist': HotList,
     'imooc-ads': Ads,
     'imooc-links': Links,
-    'imooc-list': List
-    // 'imooc-top': Top
+    'imooc-list': List,
+    'imooc-top': Top
   }
 })
 </script>
