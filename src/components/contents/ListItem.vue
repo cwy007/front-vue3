@@ -1,42 +1,63 @@
 <template>
   <div>
     <ul class="fly-list">
-      <li v-for="(item,index) in items" :key="'listitem' + index">
-        <router-link class="fly-avatar" :to="{name: 'home', params: {uid: item.uid._id}}" link>
-          <img :src="item.uid.pic ? item.uid.pic : '/img/header.jpg'" alt="贤心" />
-        </router-link>
+      <li v-for="(item, index) in items" :key="'listitem' + index">
+        <!-- todo -->
+        <a
+          class="fly-avatar"
+          :to="{ name: 'home', params: { uid: item.uid._id } }"
+          link
+        >
+          <img
+            :src="item.uid.pic ? item.uid.pic : '/img/header.jpg'"
+            alt="贤心"
+          />
+        </a>
         <h2>
-          <a class="layui-badge">{{item.catalog}}</a>
-          <router-link :to="{name: 'detail', params: {tid: item._id}}">{{item.title}}</router-link>
+          <a class="layui-badge">{{ item.catalog }}</a>
+          <!-- todo -->
+          <a :to="{ name: 'detail', params: { tid: item._id } }">{{
+            item.title
+          }}</a>
         </h2>
         <div class="fly-list-info">
-          <router-link :to="{name: 'home', params: {uid: item.uid._id}}" link>
-            <cite>{{item.uid.name}}</cite>
+          <!-- todo -->
+          <a :to="{ name: 'home', params: { uid: item.uid._id } }" link>
+            <cite>{{ item.uid.name }}</cite>
             <!--<i class="iconfont icon-renzheng" title="认证信息：XXX"></i>-->
             <i
               class="layui-badge fly-badge-vip"
               v-if="item.uid.isVip !== '0'"
-            >{{'VIP' + item.uid.isVip}}</i>
-          </router-link>
-          <span>{{item.created | moment}}</span>
+              >{{ "VIP" + item.uid.isVip }}</i
+            >
+          </a>
+          <span>{{ formatDate(item.created) }}</span>
 
           <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻">
             <i class="iconfont icon-kiss"></i>
-            {{item.fav}}
+            {{ item.fav }}
           </span>
-          <span class="layui-badge fly-badge-accept layui-hide-xs" v-show="item.status !== '0'">已结</span>
+          <span
+            class="layui-badge fly-badge-accept layui-hide-xs"
+            v-show="item.status !== '0'"
+            >已结</span
+          >
           <span class="fly-list-nums">
             <i class="iconfont icon-pinglun1" title="回答"></i>
-            {{item.answer}}
+            {{ item.answer }}
           </span>
         </div>
-        <div class="fly-list-badge" v-show="item.tags.length > 0 && item.tags[0].name !== ''">
+        <div
+          class="fly-list-badge"
+          v-show="item.tags.length > 0 && item.tags[0].name !== ''"
+        >
           <span
             class="layui-badge"
             v-for="(tag, index) in item.tags"
             :key="'tag' + index"
             :class="tag.class"
-          >{{tag.name}}</span>
+            >{{ tag.name }}</span
+          >
         </div>
       </li>
     </ul>
@@ -50,14 +71,14 @@
 </template>
 
 <script>
-// import moment from 'dayjs'
-// import relativeTime from 'dayjs/plugin/relativeTime'
-// import 'dayjs/locale/zh-cn'
+import { formatDate } from '@/utils/formatDate'
+
+import { defineComponent } from 'vue'
 
 // moment.extend(relativeTime)
 
 // import _ from 'lodash'
-export default {
+export default defineComponent({
   name: 'listitem',
   props: {
     lists: {
@@ -71,6 +92,16 @@ export default {
     isEnd: {
       default: false,
       type: Boolean
+    }
+  },
+  setup (props, { emit }) {
+    console.log('setup -> props', props)
+    const more = () => {
+      emit('nextpage')
+    }
+    return {
+      more,
+      formatDate
     }
   },
   computed: {
@@ -99,24 +130,8 @@ export default {
       })
       return this.lists
     }
-  },
-  methods: {
-    more () {
-      this.$emit('nextpage')
-    }
   }
-  // filters: {
-  //   moment (date) {
-  //     // 超过7天，显示日期
-  //     if (moment(date).isBefore(moment().subtract(7, 'days'))) {
-  //       return moment(date).format('YYYY-MM-DD')
-  //     } else {
-  //       // 1小前，xx小时前，X天前
-  //       return moment(date).locale('zh-cn').from(moment())
-  //     }
-  //   }
-  // }
-}
+})
 </script>
 
 <style lang="scss" scoped>

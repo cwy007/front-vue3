@@ -38,20 +38,26 @@
         >
       </span>
     </div>
-    <!-- <list-item :lists="lists" :isEnd="isEnd" @nextpage="nextPage()"></list-item> -->
+    <list-item
+      :lists="state.lists"
+      :isEnd="state.isEnd"
+      @nextpage="nextPage()"
+    ></list-item>
   </div>
 </template>
 
 <script lang="ts">
-// import ListItem from './ListItem'
+import ListItem from './ListItem.vue'
 // import listMix from '@/mixin/list'
 import { getList } from '@/api/content'
-import { defineComponent, onMounted, reactive, watch } from 'vue'
-import router from '@/router'
+import { defineComponent, onMounted, reactive, toRef, watch } from 'vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { HttpResponse } from '@/common/interface'
 export default defineComponent({
   name: 'list',
+  components: {
+    'list-item': ListItem
+  },
   setup () {
     const state = reactive({
       status: '',
@@ -67,10 +73,6 @@ export default defineComponent({
       lists: [
       ]
     })
-
-    const search = (val: number | null) => {
-      console.log('search -> val', val)
-    }
 
     const route = useRoute()
     const catalog = route?.params?.catalog as string
@@ -114,7 +116,7 @@ export default defineComponent({
       } catch (error) {
         state.isRepeat = false
         if (error) {
-          // this.$alert(err.message)
+          // state.$alert(err.message)
         }
       }
     }
@@ -138,7 +140,7 @@ export default defineComponent({
     //   }
     // )
 
-    // same as beforeRouteUpdate option with no access to `this`
+    // same as beforeRouteUpdate option with no access to `state`
     onBeforeRouteUpdate(async () => {
       // only fetch the user if the id changed as maybe only the query or the hash changed
       init()
@@ -147,82 +149,55 @@ export default defineComponent({
     onMounted(() => {
       handleGetList()
     })
+
+    const current = toRef(state, 'current')
+    watch(current, init)
+    // watch(() => state.current, init)
+
+    const search = (val: number | null) => {
+      if (typeof val === 'undefined' && state.current === '') {
+        return
+      }
+      state.current = val ? val + '' : ''
+      switch (val) {
+      // 未结贴
+        case 0:
+          state.status = '0'
+          state.tag = ''
+          break
+          // 已结贴
+        case 1:
+          state.status = '1'
+          state.tag = ''
+          break
+          // 查询"精华"标签
+        case 2:
+          state.status = ''
+          state.tag = '精华'
+          break
+          // 按照时间去查询
+        case 3:
+          state.sort = 'created'
+          break
+          // 按照评论数去查询
+        case 4:
+          state.sort = 'answer'
+          break
+          // 综合查询
+        default:
+          state.status = ''
+          state.tag = ''
+          state.current = ''
+      }
+    }
+
     return {
       state,
-      search
+      search,
+      nextPage
     }
   }
 })
-// mixins: [listMix],
-// data () {
-//   return {
-//     status: '',
-//     tag: '',
-//     sort: 'created',
-//     page: 0,
-//     limit: 20,
-//     catalog: '',
-//     isEnd: false,
-//     isRepeat: false,
-//     current: '',
-//     lists: []
-//   }
-// },
-// components: {
-//   // ListItem
-// },
-// watch: {
-//   current (newval, oldval) {
-//     // 去兼听current标签是否有变化，如果有变化，则需要重新进行查询
-//     this.init()
-//   },
-//   $route (newval, oldval) {
-//     const catalog = this.$route.params.catalog
-//     if (typeof catalog !== 'undefined' && catalog !== '') {
-//       this.catalog = catalog
-//     }
-//     this.init()
-//   }
-// },
-// methods: {
-//   search (val) {
-//     if (typeof val === 'undefined' && this.current === '') {
-//       return
-//     }
-//     this.current = val
-//     switch (val) {
-//       // 未结贴
-//       case 0:
-//         this.status = '0'
-//         this.tag = ''
-//         break
-//       // 已结贴
-//       case 1:
-//         this.status = '1'
-//         this.tag = ''
-//         break
-//       // 查询"精华"标签
-//       case 2:
-//         this.status = ''
-//         this.tag = '精华'
-//         break
-//       // 按照时间去查询
-//       case 3:
-//         this.sort = 'created'
-//         break
-//       // 按照评论数去查询
-//       case 4:
-//         this.sort = 'answer'
-//         break
-//       // 综合查询
-//       default:
-//         this.status = ''
-//         this.tag = ''
-//         this.current = ''
-//     }
-//   }
-// }
-
 </script>
 
 <style lang="scss" scoped>
