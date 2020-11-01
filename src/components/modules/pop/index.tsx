@@ -1,15 +1,16 @@
 import PopComponent from './Pop.vue'
 import { App, createApp } from 'vue'
 
-export const popup = (msg: string, type = '') => {
+export const popup = (msg: string, type = '', delay = 2000) => {
   // 注册Pop组件
   const root = document.createElement('div')
   document.body.appendChild(root)
 
   // 添加实例方法，以供全局进行调用
   const options = {
+    msg,
     type,
-    msg
+    delay
   }
 
   const popCom = createApp({

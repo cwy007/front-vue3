@@ -6,7 +6,6 @@
 </template>
 
 <script>
-const delay = 2000
 
 export default {
   name: 'Pop',
@@ -19,9 +18,9 @@ export default {
       type: String,
       default: ''
     },
-    isShow: {
-      type: Boolean,
-      default: false
+    delay: {
+      type: Number,
+      default: 2000
     },
     unmount: {
       type: Function,
@@ -35,7 +34,7 @@ export default {
     this.$refs.tips.style.marginTop = -height / 2 + 'px'
     setTimeout(() => {
       this.unmount()
-    }, delay)
+    }, this.delay)
   }
 }
 </script>
