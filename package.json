@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@vee-validate/i18n": "^4.0.0-beta.0",
-    "@vee-validate/rules": "^4.0.0-beta.0",
+    "@vee-validate/rules": "^4.0.3",
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "dayjs": "^1.9.4",
@@ -41,7 +41,7 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^7.0.0-0",
-    "sass": "^1.26.5",
+    "sass": "^1.30.0",
     "sass-loader": "^8.0.2",
     "typescript": "~3.9.3"
   }
