@@ -1,4 +1,4 @@
-import axios from '@/utils/request'
+import axios from '@/common/request'
 import { LoginInfo, RegInfo, ResetInfo, ForgetInfo } from '@/common/interface'
 
 /**

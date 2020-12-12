@@ -1,10 +1,10 @@
 // 封装axios的请求，返回重新封装的数据格式
 // 对错误的统一处理
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, Canceler } from 'axios'
-import errorHandle from './errorHandle'
-import store from '@/store'
-import publicConfig from '@/config'
 import { HttpResponse } from '@/common/interface'
+import publicConfig from '@/config'
+import store from '@/store'
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, Canceler } from 'axios'
+import errorHandle from '../common/errorHandle'
 const CancelToken = axios.CancelToken
 
 class HttpRequest {
@@ -97,7 +97,7 @@ class HttpRequest {
     return this.request(options)
   }
 
-  post (url: string, data?: any): Promise<AxiosResponse> | Promise<HttpResponse> {
+  post (url: string, data?: unknown): Promise<AxiosResponse> | Promise<HttpResponse> {
     return this.request({
       method: 'post',
       url: url,

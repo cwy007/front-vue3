@@ -1,12 +1,16 @@
-import { getCode, login, reg } from '@/api/login'
+import { getCode, login, reg, forget, reset } from '@/api/login'
 import { HttpResponse } from '@/common/interface'
 import { v4 as uuidv4 } from 'uuid'
 import store from '@/store'
-import router from '@/router'
 import { reactive } from 'vue'
+import { getDecodeParam } from '../utils/common'
+// import { useRouter } from 'vue-router'
+import router from '@/router'
 
-export const loginService = () => {
+export const LoginService = () => {
   let sid = ''
+
+  // const router = useRouter()
 
   const state = reactive({
     username: '',
@@ -78,10 +82,41 @@ export const loginService = () => {
     return res
   }
 
+  const forgetHandle = async () => {
+    const res = await forget({
+      username: state.username,
+      code: state.code
+    })
+
+    const { code } = res as HttpResponse
+
+    if (code === 200) {
+      alert('邮件发送成功')
+    }
+
+    return res
+  }
+
+  const resetHandle = async () => {
+    const key = getDecodeParam('key')
+    const res = await reset({
+      key: key || '',
+      password: state.password,
+      sid: store.state.sid,
+      code: state.code
+    })
+    const { code } = res as HttpResponse
+    if (code === 200) {
+      router.push({ name: 'login' })
+    }
+  }
+
   return {
     state,
     getCaptcha,
     loginHandle,
-    regHandle
+    regHandle,
+    forgetHandle,
+    resetHandle
   }
 }

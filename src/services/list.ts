@@ -1,9 +1,9 @@
 import { getList } from '@/api/content'
-import { onMounted, reactive, toRef, watch } from 'vue'
-import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 import { HttpResponse } from '@/common/interface'
+import { reactive } from 'vue'
+import { useRoute } from 'vue-router'
 
-export const listService = () => {
+export const ListService = () => {
   const state = reactive({
     status: '',
     tag: '',

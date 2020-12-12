@@ -1,5 +1,5 @@
-import AlertComponent from './Alert.vue'
 import { App, createApp } from 'vue'
+import AlertComponent from './Alert.vue'
 
 export const alert = (msg: string) => {
   const root = document.createElement('div')
@@ -24,7 +24,7 @@ export const alert = (msg: string) => {
   alertCom.mount(root)
 }
 
-export const confirm = (msg: string, success: any, cancel: any) => {
+export const confirm = (msg: string, success: Function, cancel: Function) => {
   // 1. 添加alert 根点
   const root = document.createElement('div')
   document.body.appendChild(root)

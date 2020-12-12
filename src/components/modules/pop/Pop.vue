@@ -6,8 +6,9 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'Pop',
   props: {
     type: {
@@ -36,7 +37,7 @@ export default {
       this.unmount()
     }, this.delay)
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

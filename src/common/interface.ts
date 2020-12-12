@@ -86,3 +86,36 @@ export declare type SubmissionContext<TValues extends Record<string, any> = Reco
 }
 
 export declare type SubmissionHandler<TValues extends Record<string, any> = Record<string, any>> = (values: TValues, ctx: SubmissionContext<TValues>) => any;
+
+export interface PageCommon {
+  page: number;
+  limit: number;
+  index?: number;
+}
+
+export interface PostPageCommon extends PageCommon{
+  uid: string;
+}
+
+export interface SortOptions extends PageCommon{
+  catalog?: string;
+  isTop?: number;
+  sort?: string;
+  tag?: string;
+  status?: string;
+}
+
+export interface PostInfo {
+  title: string;
+  catalog?: string;
+  content: string;
+  fav?: number;
+  code: string;
+  sid: string;
+}
+
+export interface CommentsInfo {
+  content: string;
+  code: string;
+  sid: string;
+}

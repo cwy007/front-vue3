@@ -25,10 +25,7 @@
           <!-- 未登入的状态 -->
           <template v-if="!isShow">
             <li class="layui-nav-item">
-              <a
-                class="iconfont icon-touxiang layui-hide-xs"
-                to="/user123123"
-              ></a>
+              <a class="iconfont icon-touxiang layui-hide-xs" to="/user123123"></a>
             </li>
             <li class="layui-nav-item">
               <router-link :to="{ name: 'login' }">登入</router-link>
@@ -37,41 +34,24 @@
               <router-link :to="{ name: 'reg' }">注册</router-link>
             </li>
             <li class="layui-nav-item layui-hide-xs">
-              <a
-                href
-                onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})"
-                title="QQ登入"
-                class="iconfont icon-qq"
-              ></a>
+              <a href onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入" class="iconfont icon-qq"></a>
             </li>
             <li class="layui-nav-item layui-hide-xs">
-              <a
-                href
-                onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})"
-                title="微博登入"
-                class="iconfont icon-weibo"
-              ></a>
+              <a href onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" title="微博登入" class="iconfont icon-weibo"></a>
             </li>
           </template>
 
           <!-- 登入后的状态 -->
           <template v-else>
             <!-- 调整了Hover的区域 -->
-            <li class="layui-nav-item" @mouseover="show()" @mouseleave="hide()">
+            <li class="layui-nav-item" @mouseover="toggle(true)" @mouseleave="toggle(false)">
               <a class="fly-nav-avatar" :to="{ name: 'center' }">
                 <cite class="layui-hide-xs">{{ userInfo.name }}</cite>
                 <!-- <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i> -->
-                <i
-                  class="layui-badge fly-badge-vip layui-hide-xs"
-                  v-show="userInfo.isVip !== '0'"
-                  >VIP{{ userInfo.isVip }}</i
-                >
+                <i class="layui-badge fly-badge-vip layui-hide-xs" v-show="userInfo.isVip !== '0'">VIP{{ userInfo.isVip }}</i>
                 <img :src="userInfo.pic" />
               </a>
-              <dl
-                class="layui-nav-child layui-anim layui-anim-upbit"
-                :class="{ 'layui-show': isHover }"
-              >
+              <dl class="layui-nav-child layui-anim layui-anim-upbit" :class="{ 'layui-show': on }">
                 <dd>
                   <a :to="{ name: 'info' }">
                     <i class="layui-icon">&#xe620;</i>基本设置
@@ -79,27 +59,17 @@
                 </dd>
                 <dd>
                   <a :to="{ name: 'msg' }">
-                    <i class="iconfont icon-tongzhi" style="top: 4px"></i
-                    >我的消息
+                    <i class="iconfont icon-tongzhi" style="top: 4px"></i>我的消息
                   </a>
                 </dd>
                 <dd>
                   <a :to="{ name: 'home', params: { uid: userInfo._id } }">
-                    <i
-                      class="layui-icon"
-                      style="margin-left: 2px; font-size: 22px"
-                      >&#xe68e;</i
-                    >我的主页
+                    <i class="layui-icon" style="margin-left: 2px; font-size: 22px">&#xe68e;</i>我的主页
                   </a>
                 </dd>
                 <hr style="margin: 5px 0" />
                 <dd>
-                  <a
-                    href="javascript: void(0)"
-                    style="text-align: center"
-                    @click="logout()"
-                    >退出</a
-                  >
+                  <a href="javascript: void(0)" style="text-align: center" @click="logout()">退出</a>
                 </dd>
               </dl>
             </li>
@@ -125,20 +95,43 @@
 import { computed, defineComponent, reactive } from 'vue'
 import store from '@/store'
 import router from '@/router'
+import toggleUtils from '@/utils/toggle'
+import { confirm } from '@/components/modules/alert'
 
 export default defineComponent({
   setup () {
+    const { toggle, on } = toggleUtils(false, 500)
+
     const state = reactive({
       isHover: false,
-      hoverCtrl: {},
+      hoverCtrl: { },
       hasMsg: false
     })
+
+    const logout = () => {
+      confirm(
+        '确定退出吗？',
+        () => {
+          localStorage.clear()
+          store.commit('setToken', '')
+          store.commit('setUserInfo', {})
+          store.commit('setIsLogin', false)
+          router.push({ name: 'index' })
+        },
+        () => {
+          console.log('cancel')
+        }
+      )
+    }
 
     return {
       ...state,
       num: computed(() => store.state.num),
       isShow: computed(() => store.state.isLogin),
-      userInfo: computed(() => store.state.userInfo)
+      userInfo: computed(() => store.state.userInfo),
+      toggle,
+      on,
+      logout
     }
   }
 })
