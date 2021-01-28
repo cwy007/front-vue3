@@ -97,6 +97,13 @@ export interface PostPageCommon extends PageCommon{
   uid: string;
 }
 
+export interface SimpleUserInfo {
+  isVip: string;
+  name: string;
+  pic: string;
+  _id: string;
+}
+
 export interface SortOptions extends PageCommon{
   catalog?: string;
   isTop?: number;
@@ -110,11 +117,20 @@ export interface PostInfo {
   catalog?: string;
   content: string;
   fav?: number;
-  code: string;
-  sid: string;
+  code?: string;
+  sid?: string;
+  isEnd?: string;
+  isFav?: number;
+  tags?: Array<string>;
+  sort?: string;
+  status?: string;
+  uid?: SimpleUserInfo;
+  updated?: string;
+  created?: string;
 }
 
 export interface CommentsInfo {
+  _id: string;
   content: string;
   code: string;
   sid: string;

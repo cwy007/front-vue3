@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { ListService } from '@/services/list'
-import ListItem from './ListItem.vue'
+import ListItem from '@/components/contents/ListItem.vue'
 import { defineComponent, onMounted } from 'vue'
 export default defineComponent({
   name: 'top',

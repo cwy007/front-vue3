@@ -3,7 +3,7 @@
     <h3 class="fly-panel-title">温馨通道</h3>
     <div class="fly-panel-main layui-row">
       <ul class="layui-clear imooc-quick">
-        <li class="layui-col-xs6" v-for="(item,index) in lists" :key="'tips' + index">
+        <li class="layui-col-xs6" v-for="(item,index) in state.lists" :key="'tips' + index">
           <a :href="item.link" target="_blank">{{item.title}}</a>
         </li>
       </ul>
@@ -11,23 +11,30 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { getTips } from '@/api/content'
-export default {
+import { HttpResponse } from '@/common/interface'
+import { defineComponent, onMounted, reactive } from 'vue'
+export default defineComponent({
   name: 'tips',
-  data () {
-    return {
+  setup () {
+    const state = reactive({
       lists: []
-    }
-  },
-  mounted () {
-    getTips().then((res) => {
-      if (res.code === 200) {
-        this.lists = res.data
+    })
+
+    onMounted(async () => {
+      const res = await getTips()
+      const { code } = res as HttpResponse
+      if (code === 200) {
+        state.lists = res.data
       }
     })
+
+    return {
+      state
+    }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

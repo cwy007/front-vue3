@@ -4,13 +4,13 @@ import { v4 as uuidv4 } from 'uuid'
 import store from '@/store'
 import { reactive } from 'vue'
 import { getDecodeParam } from '../utils/common'
-// import { useRouter } from 'vue-router'
-import router from '@/router'
+import { useRouter } from 'vue-router'
+// import router from '@/router'
 
 export const LoginService = () => {
   let sid = ''
 
-  // const router = useRouter()
+  const router = useRouter()
 
   const state = reactive({
     username: '',

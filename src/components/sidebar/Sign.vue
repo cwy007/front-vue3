@@ -3,42 +3,25 @@
     <div class="fly-panel-title">
       签到
       <i class="fly-mid"></i>
-      <a
-        href="javascript:;"
-        class="fly-link"
-        id="LAY_signinHelp"
-        @click="showInfo()"
-        >说明</a
-      >
+      <a href="javascript:;" class="fly-link" id="LAY_signinHelp" @click="showInfo()">说明</a>
       <i class="fly-mid"></i>
-      <a
-        href="javascript:;"
-        class="fly-link"
-        id="LAY_signinTop"
-        @click="showTop()"
-      >
+      <a href="javascript:;" class="fly-link" id="LAY_signinTop" @click="showTop()">
         活跃榜
         <span class="layui-badge-dot"></span>
       </a>
       <span class="fly-signin-days" v-show="state.isSign || state.isLogin">
         已连续签到
-        <cite>{{ count }}</cite
-        >天
+        <cite>{{ count }}</cite>天
       </span>
     </div>
     <div class="fly-panel-main fly-signin-main">
       <template v-if="!state.isSign">
-        <button
-          class="layui-btn layui-btn-danger"
-          id="LAY_signin"
-          @click="sign()"
-        >
+        <button class="layui-btn layui-btn-danger" id="LAY_signin" @click="sign()">
           今日签到
         </button>
         <span>
           可获得
-          <cite>{{ favs }}</cite
-          >飞吻
+          <cite>{{ favs }}</cite>飞吻
         </span>
       </template>
       <!-- 已签到状态 -->
@@ -46,8 +29,7 @@
         <button class="layui-btn layui-btn-disabled">{{ state.msg }}</button>
         <span>
           获得了
-          <cite>{{ favs }}</cite
-          >飞吻
+          <cite>{{ favs }}</cite>飞吻
         </span>
       </template>
     </div>
@@ -65,6 +47,7 @@ import { computed, defineComponent, onMounted, reactive } from 'vue'
 import store from '@/store'
 import { HttpResponse } from '@/common/interface'
 import { popup } from '@/components/modules/pop'
+
 export default defineComponent({
   name: 'sign',
   components: {

@@ -2,7 +2,7 @@
   <div>
     <dl class="fly-panel fly-list-one">
       <dt class="fly-panel-title">本周热议</dt>
-      <dd v-for="(item, index) in lists" :key="'hotlist' + index">
+      <dd v-for="(item, index) in state.lists" :key="'hotlist' + index">
         <!-- todo -->
         <a :to="{ name: 'detail', params: { tid: item._id } }">{{
           item.title
@@ -20,23 +20,30 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { getTop } from '@/api/content'
-export default {
+import { HttpResponse } from '@/common/interface'
+import { defineComponent, onMounted, reactive } from 'vue'
+export default defineComponent({
   name: 'hotlist',
-  data () {
-    return {
+  setup () {
+    const state = reactive({
       lists: []
-    }
-  },
-  mounted () {
-    getTop().then((res) => {
-      if (res.code === 200) {
-        this.lists = res.data
+    })
+
+    onMounted(async () => {
+      const res = await getTop()
+      const { code } = res as HttpResponse
+      if (code === 200) {
+        state.lists = res.data
       }
     })
+
+    return {
+      state
+    }
   }
-}
+})
 </script>
 
 <style lang="scss" scoped>

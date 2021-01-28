@@ -3,9 +3,10 @@ import { RouteRecordRaw } from 'vue-router'
 import Home from '@/views/Home.vue'
 
 import login from './modules/login'
+import contents from './modules/content'
 
 const Index = () =>
-  import(/* webpackChunkName: 'index' */ '@/views/channels/Index.vue')
+  import(/* webpackChunkName: 'index' */ '@/views/channels/index.vue')
 const Template1 = () =>
   import(/* webpackChunkName: 'template1' */ '@/views/channels/Template1.vue')
 const NoFound = () =>
@@ -34,6 +35,7 @@ const routes: Array<RouteRecordRaw> = [
     ]
   },
   ...login,
+  ...contents,
   {
     path: '/404',
     name: '404',
