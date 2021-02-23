@@ -27,11 +27,13 @@
                   </div>
                 </div>
                 <div class="layui-form-item">
-                  <label for="L_username" class="layui-form-label">昵称</label>
-                  <div class="layui-input-inline">
-                    <Field as="input" type="text" rules="required|min:4" name="name" v-model="state.name" placeholder="请输入昵称" autocomplete="off" class="layui-input" />
+                  <div class="layui-row">
+                    <label for="L_username" class="layui-form-label">昵称</label>
+                    <div class="layui-input-inline">
+                      <Field as="input" type="text" rules="required|min:4" name="name" v-model="state.name" placeholder="请输入昵称" autocomplete="off" class="layui-input" />
+                    </div>
                   </div>
-                  <div class="layui-form-mid">
+                  <div class="layui-row">
                     <span style="color: #c00">{{ errors.name }}</span>
                   </div>
                 </div>
