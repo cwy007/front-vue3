@@ -24,8 +24,7 @@ export default defineComponent({
       default: 2000
     },
     unmount: {
-      type: Function,
-      default: () => { console.log('unmount') }
+      type: Function
     }
   },
   mounted () {

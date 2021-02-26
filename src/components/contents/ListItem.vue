@@ -71,7 +71,7 @@ export default defineComponent({
     }
   },
   setup (props, { emit }) {
-    console.log('setup -> props', props)
+    // console.log('setup -> props', props)
     const more = () => {
       emit('nextpage')
     }

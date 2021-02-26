@@ -3,19 +3,14 @@
     <div class="alert">
       <div class="flex">{{ state.msg }}</div>
       <div v-if="state.type === 'alert'">
-        <div class="btnCommon success"
-             @click="close()">确定</div>
+        <div class="btnCommon success" @click="close()">确定</div>
       </div>
-      <div v-else
-           class="space-round">
-        <div class="btnCommon cancel"
-             @click="cancelEvent()">取消</div>
-        <div class="btnCommon success"
-             @click="successEvent()">确定</div>
+      <div v-else class="space-round">
+        <div class="btnCommon cancel" @click="cancelEvent()">取消</div>
+        <div class="btnCommon success" @click="successEvent()">确定</div>
       </div>
     </div>
-    <div class="mask"
-         @click="close()"></div>
+    <div class="mask" @click="close()"></div>
   </div>
 </template>
 
@@ -35,21 +30,12 @@ export default defineComponent({
     },
     success: {
       type: Function,
-      default: () => {
-        console.log('点击了success')
-      }
     },
     cancel: {
       type: Function,
-      default: () => {
-        console.log('点击了cancel')
-      }
     },
     unmount: {
       type: Function,
-      default: () => {
-        console.log('unMount 根节点');
-      }
     }
   },
   setup (props:any) {

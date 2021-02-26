@@ -119,7 +119,7 @@ export default defineComponent({
           router.push({ name: 'index' })
         },
         () => {
-          console.log('cancel')
+          // console.log('cancel')
         }
       )
     }

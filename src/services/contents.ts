@@ -80,7 +80,7 @@ export const ContentsService = () => {
         }
       },
       () => {
-        console.log('cancel')
+        // console.log('cancel')
       }
     )
   }

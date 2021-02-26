@@ -92,7 +92,6 @@ export const LoginService = () => {
 
     if (code === 200) {
       alert('邮件发送成功')
-      console.log('test')
     }
 
     return res

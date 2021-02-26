@@ -16,7 +16,7 @@ export default defineComponent({
   },
   // 测试Alert组件 window.vue.$alert('msg')
   mounted () {
-    window.vue = this
+    // window.vue = this
   }
 })
 </script>

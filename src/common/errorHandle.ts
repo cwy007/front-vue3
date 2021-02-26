@@ -39,7 +39,6 @@ const errorHandle = async (err: AxiosError) => {
         throw new Error('refreshToken 401')
       }
     } catch (error) {
-      debugger
       // 2. 失败 -> token全失效需要用户重新登录
       localStorage.clear()
       store.commit('setToken', '')
