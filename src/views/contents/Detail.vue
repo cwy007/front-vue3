@@ -65,7 +65,7 @@
             <!-- <a class="layui-btn layui-btn-sm jie-admin" :to="{name: 'edit', params: {tid: tid , page: page}}" v-show="state.page.isEnd === '0' && state.page.uid._id === user._id">编辑</a> -->
             <a class="layui-btn layui-btn-sm jie-admin-collect" :class="{'layui-btn-primary': state.page.isFav}">{{state.page.isFav ? '取消收藏': '收藏'}}</a>
           </div>
-          <div class="detail-body photos" v-html="content"></div>
+          <div class="detail-body photos" v-html="state.page.content"></div>
         </div>
 
         <!-- 回帖相关的内容 -->
@@ -78,7 +78,7 @@
           <div class="layui-form layui-form-pane">
             <form>
               <Form ref="observer" v-slot="{ validate,errors }">
-                <!-- <imooc-edit @changeContent="addContent" :initContent="editInfo.content"></imooc-edit> -->
+                <!-- <imooc-edit @changeContent="addContent" :initContent="state.editInfo.content"></imooc-edit> -->
                 <div class="layui-form-item">
                   <div class="layui-row">
                     <label for="L_vercode" class="layui-form-label">验证码</label>
@@ -124,6 +124,7 @@ const {
   state,
   tag,
   getPostDetail
+  // addContent
 } = ContentsService()
 const { state: codeState, getCaptcha } = LoginService()
 
@@ -136,7 +137,7 @@ export default defineComponent({
     Comments,
     'imooc-panel': Panel,
     'imooc-simplebar': SimpleSideBar
-    // 'imooc-edit': Editor,
+    // 'imooc-edit': Editor
     // 'imooc-page': Pagination
   },
   setup (props) {
@@ -150,6 +151,7 @@ export default defineComponent({
       state,
       codeState,
       getCaptcha,
+      // addContent,
       tag
     }
   }

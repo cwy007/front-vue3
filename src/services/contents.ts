@@ -126,12 +126,17 @@ export const ContentsService = () => {
     }
   }
 
+  const addContent = (val) => {
+    state.editInfo.content = val
+  }
+
   return {
     tag,
     state,
     getPostDetail,
     getCommentsList,
     editComment,
+    addContent,
     setBest,
     hands,
     reply
