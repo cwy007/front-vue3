@@ -95,7 +95,7 @@ export default defineComponent({
       return result
     })
 
-    let ctrl: number
+    let ctrl
 
     const nextSign = () => {
       clearInterval(ctrl)

@@ -13,7 +13,7 @@ export const alert = (msg: string) => {
   const alertCom = createApp({
     setup () {
       const unmount = () => {
-        alertCom.unmount(root)
+        alertCom.unmount()
         document.body.removeChild(root)
       }
       const newOptions = Object.assign(options, { unmount })
@@ -40,7 +40,7 @@ export const confirm = (msg: string, success: Function, cancel: Function) => {
   const alertCom = createApp({
     setup () {
       const unmount = () => {
-        alertCom.unmount(root)
+        alertCom.unmount()
         document.body.removeChild(root)
       }
       const newOptions = Object.assign(options, { unmount })

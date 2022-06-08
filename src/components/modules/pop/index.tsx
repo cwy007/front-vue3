@@ -16,7 +16,7 @@ export const popup = (msg: string, type = '', delay = 2000) => {
   const popCom = createApp({
     setup () {
       const unmount = () => {
-        popCom.unmount(root)
+        popCom.unmount()
         document.body.removeChild(root)
       }
       const newOptions = Object.assign(options, { unmount })
