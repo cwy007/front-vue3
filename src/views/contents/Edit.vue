@@ -1,3 +1,4 @@
+
 <template>
   <div class="layui-container fly-marginTop" :class="{'d-hide': isHide}">
     <div class="fly-panel" pad20 style="padding-top: 5px;">
@@ -104,6 +105,7 @@
 </template>
 
 <script>
+/* eslint-disable @typescript-eslint/camelcase */
 import { updatePost } from '@/api/content'
 import CodeMix from '@/mixin/code'
 import Editor from '../modules/editor/Index'

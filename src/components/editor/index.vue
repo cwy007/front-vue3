@@ -78,7 +78,7 @@ export default {
     }
   },
   watch: {
-    initContent (newval, oldval) {
+    initContent (newval) {
       this.content = newval
     }
   },
@@ -98,10 +98,10 @@ export default {
     // 计算光标的当前位置
     getPos () {
       let cursorPos = 0
-      let elem = document.getElementById('edit')
+      const elem = document.getElementById('edit')
       if (document.selection) {
         // IE
-        let selectRange = document.selection.createRange()
+        const selectRange = document.selection.createRange()
         selectRange.moveStart('character', -elem.value.length)
         cursorPos = selectRange.text.length
       } else if (elem.selectionStart || elem.selectionStart === '0') {
@@ -163,7 +163,7 @@ export default {
       if (typeof this.content === 'undefined') {
         return
       }
-      let tmp = this.content.split('')
+      const tmp = this.content.split('')
       tmp.splice(this.pos, 0, val)
       this.content = tmp.join('')
     }
@@ -179,7 +179,7 @@ export default {
       this.codeHeight = this.$refs.textEdit.offsetHeight - 80
     })
   },
-  beforeDestroy () {
+  beforeUnmount () {
     document.querySelector('body').removeEventListener('click', this.handleBodyClick)
   }
 }

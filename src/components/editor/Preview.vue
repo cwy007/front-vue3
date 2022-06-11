@@ -17,7 +17,7 @@ export default {
   name: 'Preview',
   props: ['isShow', 'content'],
   watch: {
-    isShow (newval, oldval) {
+    isShow (newval) {
       if (newval) {
         this.$store.commit('setHide', true)
       } else {

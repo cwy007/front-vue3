@@ -99,7 +99,7 @@
 </template>
 
 <script lang="ts">
-import { addPost } from '@/api/content'
+// import { addPost } from '@/api/content'
 // import CodeMix from '@/mixin/code'
 import Editor from '../modules/editor/index.vue'
 import { defineComponent } from 'vue'

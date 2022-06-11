@@ -93,7 +93,7 @@ export default defineComponent({
         form?.setErrors({ code: msg })
       }
       // console.log('🚀 ~ file: Login.vue ~ line 90 ~ submit ~ res', res)
-      // console.log('🚀 ~ file: Login.vue ~ line 89 ~ submit ~ form', form)
+      console.log('🚀 ~ file: Login.vue ~ line 89 ~ submit ~ form', form)
       // console.log('🚀 ~ file: Login.vue ~ line 89 ~ submit ~ values', values)
     }
 

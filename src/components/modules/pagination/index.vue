@@ -95,12 +95,12 @@ export default defineComponent({
       isSelect: false,
       optIndex: 0,
       options: [10, 20, 30, 50, 100],
-      pages: [],
+      pages: [] as number[],
       limit: 10
     }
   },
   watch: {
-    total (newval, oldval) {
+    total () {
       this.initPages()
     }
   },

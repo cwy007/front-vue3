@@ -1,6 +1,4 @@
-import { ComputedRef } from 'vue'
-import { ObjectSchema } from 'yup'
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface UserInfo {
   _id: string;
   username?: string;
@@ -60,33 +58,6 @@ export interface ValidationResult {
 export declare type SubmitEvent = Event & {
   target: HTMLFormElement;
 };
-
-export declare type GenericValidateFunction = (value: any) => boolean | string | Promise<boolean | string>;
-export interface FormContext<TValues extends Record<string, any> = Record<string, any>> {
-  register(field: any): void;
-  unregister(field: any): void;
-  values: TValues;
-  fields: ComputedRef<Record<keyof TValues, any>>;
-  schema?: Record<keyof TValues, GenericValidateFunction | string | Record<string, any>> | ObjectSchema<TValues>;
-  validateSchema?: (shouldMutate?: boolean) => Promise<Record<keyof TValues, ValidationResult>>;
-  setFieldValue<T extends keyof TValues>(field: T, value: TValues[T]): void;
-  setFieldError: (field: keyof TValues, message: string | undefined) => void;
-  setErrors: (fields: Partial<Record<keyof TValues, string | undefined>>) => void;
-  setValues<T extends keyof TValues>(fields: Partial<Record<T, TValues[T]>>): void;
-  setFieldTouched: (field: keyof TValues, isTouched: boolean) => void;
-  setTouched: (fields: Partial<Record<keyof TValues, boolean>>) => void;
-  setFieldDirty: (field: keyof TValues, isDirty: boolean) => void;
-  setDirty: (fields: Partial<Record<keyof TValues, boolean>>) => void;
-  reset: () => void;
-}
-
-export declare type SubmissionContext<TValues extends Record<string, any> = Record<string, any>> = {
-  evt: SubmitEvent;
-  form: FormContext<TValues>;
-}
-
-export declare type SubmissionHandler<TValues extends Record<string, any> = Record<string, any>> = (values: TValues, ctx: SubmissionContext<TValues>) => any;
-
 export interface PageCommon {
   page: number;
   limit: number;

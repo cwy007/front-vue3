@@ -79,8 +79,8 @@
                 </div>
                 <div class="layui-form-item fly-form-app">
                   <span>或者直接使用社交账号快捷注册</span>
-                  <a href onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
-                  <a href onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
+                  <a onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
+                  <a onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
                 </div>
               </div>
             </div>
@@ -93,9 +93,9 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
-import { Form, Field } from 'vee-validate'
+import { Form, Field, SubmissionHandler } from 'vee-validate'
 import { LoginService } from '@/services/login'
-import { SubmissionHandler, LoginInfo, HttpResponse } from '@/common/interface'
+import { HttpResponse } from '@/common/interface'
 
 export default defineComponent({
   name: 'Reg',
@@ -106,13 +106,13 @@ export default defineComponent({
   setup () {
     const { state, getCaptcha, regHandle } = LoginService()
 
-    const submit: SubmissionHandler<LoginInfo> = async (value, { form }) => {
+    const submit: SubmissionHandler = async (value, form) => {
       const res = await regHandle()
-      const { setErrors, reset } = form
+      const { setErrors, resetForm } = form
       const { code, msg } = res as HttpResponse
       if (code === 200) {
         requestAnimationFrame(() => {
-          reset()
+          resetForm()
         })
       } else if (typeof msg === 'object') {
         setErrors({

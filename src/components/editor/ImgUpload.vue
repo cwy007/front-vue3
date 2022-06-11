@@ -60,8 +60,8 @@ export default {
       this.formData = ''
     },
     upload (e) {
-      let file = e.target.files
-      let formData = new FormData()
+      const file = e.target.files
+      const formData = new FormData()
       if (file.length > 0) {
         formData.append('file', file[0])
         this.formData = formData
