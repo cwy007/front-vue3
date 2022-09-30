@@ -54,8 +54,8 @@
                 </div>
                 <div class="layui-form-item fly-form-app">
                   <span>或者使用社交账号登入</span>
-                  <a href onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
-                  <a href onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
+                  <a onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
+                  <a onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
                 </div>
               </div>
             </div>
@@ -72,14 +72,14 @@ import { LoginService } from '@/services/login'
 import { defineComponent, onMounted } from 'vue'
 import { alert } from '@/components/modules/alert'
 
-const { state, loginHandle, getCaptcha } = LoginService()
-
 export default defineComponent({
   name: 'login',
   components: {
     Form, Field
   },
   setup () {
+    const { state, loginHandle, getCaptcha } = LoginService()
+
     onMounted(async () => await getCaptcha())
 
     return {
